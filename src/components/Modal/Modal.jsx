@@ -3,18 +3,15 @@ import { useEffect } from 'react';
 
 const Modal = ({ imgURL, alt, closeModal }) => {
   useEffect(() => {
+    const handleKeyDown = e => {
+      if (e.keyCode === 27) closeModal();
+    };
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleKeyDown = e => {
-    if (e.keyCode === 27) {
-      closeModal();
-    }
-  };
+  }, [closeModal]);
 
   const handleBackDropClick = e => {
     if (e.currentTarget === e.target) closeModal();
